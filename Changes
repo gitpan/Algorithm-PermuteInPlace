@@ -1,0 +1,6 @@
+Revision history for Perl extension Algorithm::PermuteInPlace.
+
+0.01  Fri Aug 24 13:20:57 2001
+	- original version; created by h2xs 1.1.1.4 with options
+		-AXn Algorithm::PermuteInPlace
+
