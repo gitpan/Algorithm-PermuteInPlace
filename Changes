@@ -4,3 +4,7 @@ Revision history for Perl extension Algorithm::PermuteInPlace.
 	- original version; created by h2xs 1.1.1.4 with options
 		-AXn Algorithm::PermuteInPlace
 
+0.02  Sun Aug 26 11:22:42 BST 2001
+	- make it work in 5.6.1 and below (don't rely on the AV* typemap).
+	- fix a heap overrun error (ouch!)
+        - change the line-endings on the README file

@@ -1,1 +1,37 @@
------------------------------------------------------------------------------| Algorithm::PermuteInPlace v0.01    - Robin Houston, 2001-08-24-----------------------------------------------------------------------------Note: This version of Algorithm::PermuteInPlace requires Brian Ingerson's      Inline module (available from CPAN) to be installed.NAME       Algorithm::PermuteInPlace - Fast permutationsSYNOPSIS         use Algorithm::PermuteInPlace;         my @array = (1..9);         my $permutor = Algorithm::PermuteInPlace->new(\@array);         print "@array\n";         print "@array\n" while $permutor->next();DESCRIPTION       This module will generate all the permutations of an       array, modifying the array in-place.  That allows it to be       very fast....
+-----------------------------------------------------------------------------
+| Algorithm::PermuteInPlace v0.02    - Robin Houston, 2001-08-26
+-----------------------------------------------------------------------------
+
+Changes since v0.01:
+	- make it work in 5.6.1 and below (don't rely on the AV* typemap).
+	- fix a heap overrun error (ouch!)
+	- change the line-endings on the README file
+
+Note: This version of Algorithm::PermuteInPlace requires Brian Ingerson's
+      Inline module (available from CPAN) to be installed.
+
+
+NAME
+       Algorithm::PermuteInPlace - Fast permutations
+
+SYNOPSIS
+         use Algorithm::PermuteInPlace;
+         my @array = (1..9);
+         my $permutor = Algorithm::PermuteInPlace->new(\@array);
+         print "@array\n";
+         print "@array\n" while $permutor->next();
+
+
+DESCRIPTION
+       This module will generate all the permutations of an
+       array, modifying the array in-place.  That allows it to be
+       very fast.
+...
+
+
+Final note: Since I wrote this, I discovered an even faster way to generate
+            permutations. You can find an implementation at
+
+            http://London.pm.org/~robin/Algorithm-FastPermute-0.01.tar.gz
+
+            The interface is somewhat different: it uses callbacks.

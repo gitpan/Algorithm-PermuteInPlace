@@ -8,7 +8,7 @@ use vars qw(@ISA $VERSION);
 
 @ISA = qw(Exporter);
 BEGIN {
-    $VERSION = 0.01;
+    $VERSION = 0.02;
 }
 
 use Inline Config=>
@@ -24,11 +24,16 @@ typedef struct {
     I8*   d;
 } Permutor;
 
-SV* new(char* class, AV* array) {
+SV* new(char* class, SV* array_sv) {
     Permutor* self       = (Permutor*)malloc(sizeof(Permutor));
     SV*       selfref_sv = newSV(0);
     SV*       self_sv    = newSVrv(selfref_sv, class);
     I32       i;
+    AV*       array;
+    
+    if (!SvROK(array_sv)    || SvTYPE(SvRV(array_sv)) != SVt_PVAV)
+        Perl_croak(aTHX_ "Array is not an ARRAY reference");
+    array    = (AV*)SvRV(array_sv);
     
     if (SvREADONLY(array))
         Perl_croak(aTHX_ "Array is read-only");
@@ -38,8 +43,8 @@ SV* new(char* class, AV* array) {
     
     self->array = (AV*) SvREFCNT_inc(array);
     self->len   = av_len(array);
-    self->p     = (I32*)malloc(self->len * sizeof(I32));
-    self->d     = (I8*) malloc(self->len * sizeof(I8));
+    self->p     = (I32*)malloc((1+self->len) * sizeof(I32));
+    self->d     = (I8*) malloc((1+self->len) * sizeof(I8));
     
     for (i=0; i <= self->len; ++i) {
         (self->d)[i] = (I8) -1;
